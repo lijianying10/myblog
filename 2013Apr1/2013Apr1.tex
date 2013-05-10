@@ -1,0 +1,110 @@
+\documentclass[twoside]{article}
+
+
+% ------
+% Fonts and typesetting settings
+\usepackage[sc]{mathpazo}
+\usepackage[T1]{fontenc}
+\linespread{1.05} % Palatino needs more space between lines
+\usepackage{microtype}
+
+
+% ------
+% Page layout
+\usepackage[hmarginratio=1:1,top=32mm,columnsep=20pt]{geometry}
+\usepackage[font=it]{caption}
+\usepackage{paralist}
+\usepackage{multicol}
+
+% ------
+% Lettrines
+\usepackage{lettrine}
+
+
+% ------
+% Abstract
+\usepackage{abstract}
+	\renewcommand{\abstractnamefont}{\normalfont\bfseries}
+	\renewcommand{\abstracttextfont}{\normalfont\small\itshape}
+
+
+% ------
+% Titling (section/subsection)
+\usepackage{titlesec}
+\renewcommand\thesection{\Roman{section}}
+\titleformat{\section}[block]{\large\scshape\centering}{\thesection.}{1em}{}
+
+
+% ------
+% Header/footer
+\usepackage{fancyhdr}
+	\pagestyle{fancy}
+	\fancyhead{}
+	\fancyfoot{}
+	\fancyhead[C]{BLOG $\bullet$ April 2013 $\bullet$ No. 1}
+	\fancyfoot[RO,LE]{\thepage}
+
+%中文支持
+\usepackage{CJKutf8}
+\usepackage[
+unicode=true
+]{hyperref}
+\usepackage{indentfirst}
+
+
+% ------
+% Clickable URLs (optional)
+\usepackage{hyperref}
+
+% ------
+% Maketitle metadata
+\title{\vspace{-15mm}%
+	\fontsize{24pt}{10pt}\selectfont
+	\textbf{作为我博客的开头}
+	}	
+\author{%
+	\large
+	\textsc{Philo.Li}\thanks{Blog List \href{http://pan.baidu.com/share/link?shareid=447381&uk=1174529285}{百度网盘}} \\[2mm]
+	\normalsize	Neusoft\&HUST\\
+	\normalsize	\href{mailto:lijianyin12@gmail.com}{lijianying12@gmail.com} \\
+	\normalsize    \href{http://list.qq.com/cgi-bin/qf_invite?id=3d1e7484dfbdb88f545e4d8f053df370fe9cc5b9e7a60e07}{mailing List}
+	\vspace{-5mm}
+	}
+\date{}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\begin{CJK*}{UTF8}{gbsn}
+
+\maketitle
+\thispagestyle{fancy}
+
+%\begin{abstract}
+%\noindent
+%\end{abstract}
+	
+
+\begin{multicols}{2}
+曾经看过一篇文章上面说一些关于写博客的必要性。主要是说一些写博客的好处，当然我个人是非常认同的。首先写博客可以对自己掌握的知识进行巩固，因为当我把我自己知道的东西写成博客的时候会发现很多细小的问题甚至还可以发现自己还没有掌握的盲点，另外还可以帮助别人解决一些问题。但是我在网上找了好多写博客的地方，感觉都不是非常满意，主要是因为排版上的一些问题因为现在大多的博客都是有很多限制的比如说字体上的限制。他只能选择备选的那些字体。还有自己想要的那些板式，更重要的是。因为里面有很多广告所以很气人。我讨厌广告。但是也没办法毕竟人家blog网站也是要活着的。需要营销嘛。虽然说把自己的博客放在博客网站可以满足自己的大部分需求，但是我感觉这会束缚自己的想法，我比较喜欢自由因此我是想自己写成文档的方法来发表自己的博客。
+
+\section{为什么使用\LaTeX来作为我的主要排版工具}
+因为如果使用\LaTeX来搞定我的排版问题真的是非常轻松愉快的事。只需要一个pdflatex的编译器就可以搞定我遇到的所有问题。并且他的排版是非常专业的。仅仅是刚开始上手的时候感觉比较难受。等上手了之后还是可以很快速的实现自己的需求的。另外，通过代码的方式来写文档，可以很好的做版本管理，这也是我不满意普通博客的地方。因为自己的博客在发表了之后很有可能遇到各种问题。也许在其他朋友的帮助和支持下会发现很多问题，需要很多补充。这时候版本管理就很重要了。如果采用文件的形式来发表这个文章的话。对于自己来说是备份是非常容易的。另外文章的相互交流也是很容易就能做到的。在pdflatex的平台上编译文档对于我来说是一个非常开心的事。
+
+\section{为什么要使用百度网盘来上传我自己的博客}
+
+从目前来看百度网盘对于开放的需要是非常好的。因为只要一个连接就可以看到我的文件列表这样的方便性是我目前能遇见到的服务中最好的一个了。当然github也许对于我来说是个更好的选择。但是我思考了很久之后还是决定在百度网盘上建立自己的“家”，因为github没事就会被墙，毕竟是国外的服务。另外他的速度在校园网里面真的是慢的可以了。所以我选择了百度网盘作为我的基础存储服务。还有一个比较糗的事就是我在github上面认证不了。我把我的sshkey上传到网站上去了也不好用来回测试了好久了。也没有好用。真的是让我心碎。
+
+\section{为什么要使用mailinglist}
+
+因为自己写的一些博客还是希望及时的能推送到朋友们的手中，同时我也希望能有很多的反馈来帮助我解决一些技术上的问题。因此我在qq邮箱上弄了一个mailinglist来帮助我实现这个目的。总之我不会胡乱的操作我的mailinglist发广告或者发一些无意义的东西。
+
+\section{总结}
+
+好的开头差不多就这些了。多说也没有用，希望我的选择是对的。能帮助自己也能帮助别人。一页正好！
+
+\end{multicols}
+
+\end{CJK*}
+\end{document}

@@ -1,0 +1,8 @@
+\select@language {english}
+\contentsline {section}{\numberline {1}Simple use of CMake}{1}{section.1}
+\contentsline {section}{\numberline {2}Root Library deploy}{2}{section.2}
+\contentsline {section}{\numberline {3}FFTW library deploy}{2}{section.3}
+\contentsline {section}{\numberline {4}sefl library build}{2}{section.4}
+\contentsline {section}{\numberline {5}Main module project build}{2}{section.5}
+\contentsline {section}{\numberline {6}Debug module code blocks}{2}{section.6}
+\contentsfinish 

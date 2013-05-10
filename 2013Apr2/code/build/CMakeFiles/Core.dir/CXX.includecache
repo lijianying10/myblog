@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/lijianying/Desktop/2013Apr2/code/src/Core/main.cpp
+iostream
+-
+lib1.h
+-
+graphics.h
+-
+FFT.h
+-
+
+/home/lijianying/Desktop/2013Apr2/code/src/FFT/FFT.h
+iostream
+-
+
+/home/lijianying/Desktop/2013Apr2/code/src/event/graphics.h
+iostream
+-
+
+/home/lijianying/Desktop/2013Apr2/code/src/lib1/lib1.h
+iostream
+-
+

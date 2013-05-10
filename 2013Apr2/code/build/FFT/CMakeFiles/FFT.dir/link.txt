@@ -1,0 +1,1 @@
+/usr/bin/c++  -fPIC    -shared -Wl,-soname,libFFT.so -o ../lib/libFFT.so CMakeFiles/FFT.dir/FFT.cxx.o  -L/home/lijianying/Desktop/2013Apr2/code/src/lib1  -L/home/lijianying/Desktop/2013Apr2/code/src/event /opt/fftw/lib/libfftw3.so -Wl,-rpath,/home/lijianying/Desktop/2013Apr2/code/src/lib1:/home/lijianying/Desktop/2013Apr2/code/src/event:/opt/fftw/lib 

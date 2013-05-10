@@ -1,0 +1,45 @@
+2013Apr2:
+一个用CMAKE组建的复杂工程的例子。
+使用例子multlib
+
+特征
+Core调度
+lib1 计算库 使用编译器icc
+event图形库的算法书写以及调用。
+fftw 调用
+
+最后穿起来跑一遍就行了。
+
+--------------------------------------------
+abstract：1.在本文中我们实现了什么
+2.这样做是为了解决什么问题。
+3.我们使用Cmake来解决什么问题。
+4.我们用Root来解决什么问题。
+5.我们用FFTW来解决什么问题。
+6.程序模块的结构介绍
+
+Introduction：
+提出一个比较变态的需求。（这里的变态要求包括 DEBUG之类的宏编译）
+想要有一个适当的程序设计模式。
+因此在这里使用CMake来满足复杂的
+库要求。简短的介绍一下Cmake在这里的作用。
+怎么组织工程。介绍一下Root，说明一下为什么要使用Root
+说明一下FFTW是什么为什么要使用FFTW
+模块结构图
+
+Root库的使用以及实施。（Root Library deploy）
+
+
+
+FFTW library deploy
+
+./configure --prefix=/opt/fftw/ --enable-shared --with-pic
+
+Calculating library develop and deploy
+
+
+Cmake 顶层设计
+
+
+
+

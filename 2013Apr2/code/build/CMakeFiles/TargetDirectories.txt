@@ -1,0 +1,4 @@
+/home/lijianying/Desktop/2013Apr2/code/build/CMakeFiles/Core.dir
+/home/lijianying/Desktop/2013Apr2/code/build/event/CMakeFiles/Event.dir
+/home/lijianying/Desktop/2013Apr2/code/build/FFT/CMakeFiles/FFT.dir
+/home/lijianying/Desktop/2013Apr2/code/build/lib1/CMakeFiles/lib1.dir

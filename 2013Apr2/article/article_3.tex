@@ -1,0 +1,266 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Stylish Article
+% LaTeX Template
+% Version 1.0 (31/1/13)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Mathias Legrand (legrand.mathias@gmail.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\iffalse 
+	2013Apr2:
+一个用CMAKE组建的复杂工程的例子。
+使用例子multlib
+
+特征
+Core调度
+lib1 计算库 使用编译器icc
+event图形库的算法书写以及调用。
+fftw 调用
+
+最后穿起来跑一遍就行了。
+
+--------------------------------------------
+abstract：1.在本文中我们实现了什么
+2.这样做是为了解决什么问题。
+3.我们使用Cmake来解决什么问题。
+4.我们用Root来解决什么问题。
+5.我们用FFTW来解决什么问题。
+6.程序模块的结构介绍
+
+Introduction：
+提出一个比较变态的需求。（这里的变态要求包括 DEBUG之类的宏编译）
+想要有一个适当的程序设计模式。
+因此在这里使用CMake来满足复杂的
+库要求。简短的介绍一下Cmake在这里的作用。
+怎么组织工程。介绍一下Root，说明一下为什么要使用Root
+说明一下FFTW是什么为什么要使用FFTW
+模块结构图
+
+Root库的使用以及实施。（Root Library deploy）
+
+
+
+FFTW library deploy
+
+./configure --prefix=/opt/fftw/ --enable-shared --with-pic
+
+Calculating library develop and deploy
+
+
+Cmake 顶层设计
+
+ \fi
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[fleqn,10pt]{SelfArx} % Document font size and equations flushed left
+
+\setlength{\columnsep}{0.55cm} % Distance between the two columns of text
+\setlength{\fboxrule}{0.75pt} % Width of the border around the abstract
+
+\definecolor{color1}{RGB}{0,0,90} % Color of the article title and sections
+\definecolor{color2}{RGB}{0,20,20} % Color of the boxes behind the abstract and headings
+
+\newlength{\tocsep} 
+\setlength\tocsep{1.5pc} % Sets the indentation of the sections in the table of contents
+\setcounter{tocdepth}{3} % Show only three levels in the table of contents section: sections, subsections and subsubsections
+
+\usepackage{lipsum} % Required to insert dummy text
+\usepackage{CJKutf8}
+% 1. 如果使用CJKutf8
+% Hyperref中应使用unicode参数
+% 2. 如果使用CJK
+% Hyperref则使用CJKbookmarks参数
+% 可惜得到的PDF书签是乱码，建议弃用
+% 3. Unicode选项和CJKbookmarks不能同时使用 
+\usepackage[
+%CJKbookmarks=true,
+unicode=true
+]{hyperref}
+\usepackage{indentfirst}%使用段首空格
+\usepackage{attachfile}
+
+\setlength{\parindent}{2em}%段首空两个字符
+%----------------------------------------------------------------------------------------
+%	ARTICLE INFORMATION
+%----------------------------------------------------------------------------------------
+
+\JournalInfo{BLOG $\bullet$ April 2013 $\bullet$ No. 2} % Journal information
+\Archive{Programming} % Additional notes (e.g. copyright, DOI, review/research article)
+
+\PaperTitle{A Complex Project build by CMake} % Article title
+
+\Authors{J.Y.LI\textsuperscript{1}*} % Authors
+\affiliation{\textsuperscript{1}\textit{school of physics , Huazhong University of Science \& Technology, WuHan ,China}} % Author affiliation
+\affiliation{\textsuperscript{1}\textit{Software engineering  , Dalian Neusoft University of Information, DaLian ,China}}
+\affiliation{*\textbf{Corresponding author}:lijianying12@gmail.com} % Corresponding author
+\affiliation{*\textbf{Document last build date : \today  . Document version : 0.1}} % Corresponding author
+
+\Keywords{Cmake --- Root --- FFT} % Keywords - if you don't want any simply remove all the text between the curly brackets
+\newcommand{\keywordname}{Keywords} % Defines the keywords heading name
+
+%----------------------------------------------------------------------------------------
+%	ABSTRACT
+%----------------------------------------------------------------------------------------
+
+\Abstract{
+In this article we have been use CMake build a complex project. Through this method we can packing many libraries  and invoke in main module. In this time we have been use CMake as the project build tool, using \textbf{ROOT} as a graphic library, use \textbf{FFTW} as Fast Fourier Transform algorithm demo. Even we have been built a library implementation by ourselves. Through many build method we have successfully build the complex project.
+\\[1ex]  %设置空行
+在本文中我们通过使用CMake的方法实现了复杂工程的构建，通过这种方法我们可以通过使用不同的技术封装成库通过主模块进行调度，其中我们通过使用CMake来做工程构建工具。期间我们的主模块通过调度以root作为图形库，以FFTW作为快速傅里叶变换库，以自建的库作为工程的数学算法库，通过不同的手段构建项目中的库。}
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+\begin{CJK*}{UTF8}{gbsn}
+
+\flushbottom % Makes all text pages the same height
+
+\maketitle % Print the title and abstract box
+
+\tableofcontents % Print the contents section
+
+\thispagestyle{empty} % Removes page numbering from the first page
+
+%----------------------------------------------------------------------------------------
+%	ARTICLE CONTENTS
+%----------------------------------------------------------------------------------------
+
+\section*{Introduction} % The \section*{} command stops section numbering
+
+In recent work we have got a special requirement, It's a computing project, we have to use FFT algorithm and many special algorithm to write programs. Even need plot diagram in real-time output, it is too complex to implementation in the situation without a framework. So we need to use CMake as the project build tool cause of its convenience and have a good libraries support. The target algorithm needs many technology supports we may include it in project subdirectory and give library compiler parameters. Use these packaged libraries need use CMake give a full solution to link them. 
+
+
+%CINT[http://root.cern.ch/drupal/content/cint]
+The program ROOT is a data analysis framework, with the core of the ROOT: CINT. Using it can be invoking in a C++ library and it also have the same function of ROOT itself. But why do we use root as the real-time diagram output library? Because it has a faster speed than any other diagram what I know. The syntax of root script is same as the C++ syntax, so it is simple to use as a C/C++ programmer. Nevertheless the best feature is that it has a rich function for data analysis.
+%(DFT) in one or more dimensions. [http://www.fftw.org/]
+
+
+FFTW is a C subroutine library for computing the discrete Fourier transform (DFT) in one or more dimensions. It support MPI for parallel computing. The reason why we using it cause of it's the most developed library for FFT algorithm. To read the sample project open the file attach.\attachfile{code.tar.gz}
+
+\begin{figure}[ht]\centering % Using \begin{figure*} makes the figure take up the entire width of the page
+\includegraphics[width=\linewidth]{figures/figure1.eps}
+\caption{Program outline}
+\label{fig:Outline}
+\end{figure}
+
+\section{Simple use of CMake}
+
+The basic using of CMake is very simple. The most things you need concentrate on is how to build you project.
+Use CMake you may know Out of source build. In this way you can make all your .o files, various temporary depend on files
+and even the binary executable without cluttering up your source tree. %http://web.cs.swarthmore.edu/~adanner/tips/cmake.php build with cmake
+If you want to do like this. You may make a new directory out of the source code tree, and then go into the build dir run the command \textbf{cmake [Source directory]}.
+The source directory is you source top dir it may contant the CMakeLists.txt.Also you can generate the project for Eclipse CDT4.
+Use CMake parameter \textbf{-G "Eclipse CDT4 - Unix Makefiles"}. run the command then you can import the build directory as an Eclipse project.
+
+\section{Root Library deploy}
+
+In this section we have a target that build a root integrate library for Core module.
+The Origin library address: \href{http://root.cern.ch/drupal/content/can-i-integrate-root-my-cmake-build}{here}
+In this web page introduction the using XCode write ROOT code.
+Then we can take an analysis on this code understand these code and transform it to our library.
+
+Now here are our analysis and the code we have been write for the core module.
+We explained all of the statement of CMake code one by one on the attachment file.
+If you have been red the file \textbf{code/src/event/CMakeLists.txt} then you will be know the 
+Root library is how to deploy. If you want for a test just compile the library and write a simple C++ program 
+invoke the library.
+
+But there are even something maybe you must notice:\\
+1. To use this library you may write plot script in root engine. If you have the script you can use the code as a C++ statement in the library.\\
+2. To add a plot function what you aim at. You need create a cpp file and correspondence h file in the library in directly. e.g.  in the subdir 
+event have file graphics.cpp and graphics.h in this file have function testGraphics it's the target function to help you plot the diagram file.\\
+3. Using Draw function to plot the graph. Use the SaveAs function save the graph as a file. Its support EPS JPG PNG even GIF.\\
+4. If you need a script support you may find many sample plot file in root install directory the path is : \textbf{[root install dir]/share/doc/root/tutorials}
+to run this samples you may run the command in the directory \textbf{root demos.C}
+\\
+
+Other information you may need:
+\begin{enumerate}[noitemsep] % [noitemsep] removes whitespace between the items for a compact look
+\item ROOT official website: \href{http://root.cern.ch/drupal/}{ClickHere}
+\item For install root we recommend use \href{http://root.cern.ch/drupal/content/downloading-root}{source file.}
+\item For more script support download \href{http://root.cern.ch/download/doc/ROOTUsersGuide.pdf}{ROOT manual}
+\item Or search in GOOGLE recomend key words Cern root [target object] [Your problem]
+\end{enumerate}
+
+
+\section{FFTW library deploy}
+
+In this section build the FFTW library for Core library. the introduction of FFTW see \href{http://www.fftw.org/}{here}
+
+Compile requirement : When configure the source code you may use the --enable-shared --with-pic.
+Using this statement for compile shared library support. 
+
+It is very simple to implementation the requirement. 
+First you need find the fftw include directory manual. if you configured the path (--prefix) you may find in the prefix path in that parameter.
+In the file \textbf{code/src/FFT/CMakeLists.txt} have an example. FFTW configure sample. the /opt/fftw is this testing prefix dir.
+
+But why not use FindFFTW.cmake? cause of this testing computer have many fftw installed position. I have to point out the position.
+The using of the library may the same as the ROOT do. 
+
+\section{sefl library build}
+%set(CMAKE_C_COMPILER icc)
+%set(CMAKE_CXX_COMPILER icpc)
+It is very simple to build a library that all of the code write by your self.
+Only create the souce file as usually. 
+Create the project build file \textbf{CMakeLists.txt}.
+The file in the code folder position: \textbf{code/src/lib1/CMakeLists.txt}
+
+Then in the requirement we need using this library for scientific computing.
+so we need change the compiler to icc or icpc.
+then you need the order in the CMakeLists.txt\\
+\textbf{SET(CMAKE\_C\_COMPILER icc)}\\
+\textbf{SET(CMAKE\_CXX\_COMPILER icpc)}\\
+
+
+
+\section{Main module project build}
+
+In previous sections include ROOT FFTW and self library build. the subproject could use and run out of the main module.
+It's mean that you can use the project for other project even out change any code!
+
+to include the subproject have many step :
+\begin{enumerate}[noitemsep] 
+\item add the subdirectory for the main project using the order : add\_subdirectory
+\item add the link director for the main project using the order : link\_directories
+\item include directorys find the order in the file and add it to that list.
+\item in the tail of the file add use the order target\_link\_libraries to link the main program to you library.
+\end{enumerate}
+
+The project sample in the path : \textbf{code/src/CMakeLists.txt}
+you may find that it is very simple to use the CMake to build you project.
+
+\section{Debug module code blocks}
+
+Some times we need write some debug code blocks for output the memory information.
+bug when we run the program don't need such codes. 
+Then we can add some code in CMakeLists.txt file\\
+\textbf{IF(CMAKE\_BUILD\_TYPE MATCHES Debug)\\
+    ADD\_DEFINITIONS(-DDEBUG)    \\
+    MESSAGE(DebugModeOpen)\\
+ELSE(CMAKE\_BUILD\_TYPE MATCHES Debug)\\
+    MESSAGE( ReleaseModeOpen )\\
+ENDIF(CMAKE\_BUILD\_TYPE MATCHES Debug)}\\
+And then you can write the source code file just like \textbf{\#ifdef DEBUG} and write \textbf{\#endif} 
+at the end of the DEBUG code block.
+
+
+\section*{conclusion}
+
+If you have a big requirement to use so many library and technology. It is a good way to build the project using CMake. Have Fun!
+
+system information:CentOS 6.3 | CMake version : 2.8.10.2 | FFTW version : 3.3.3 | ROOT version : 5.34/04
+
+
+%----------------------------------------------------------------------------------------
+\end{CJK*}
+\end{document}

@@ -1,0 +1,14 @@
+this is a template of a library using root library 
+using for create a graph
+it's download from sourceforge
+and change by JianyingLi
+for using cmake -G "Eclipse CDT4 - Unix Makefiles" [source floder]
+
+changed position:
+before source file decalre in cmake file 
+add a variable
+${CMAKE_SOURCE_DIR}
+
+problem happend positable cause of 
+the programming desiged not in 
+out of build

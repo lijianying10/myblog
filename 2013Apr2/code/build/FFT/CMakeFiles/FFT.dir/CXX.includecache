@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/lijianying/Desktop/2013Apr2/code/src/FFT/FFT.cxx
+stdio.h
+-
+fftw3.h
+-
+
+/opt/fftw/include/fftw3.h
+stdio.h
+-
+stddef.h
+-
+

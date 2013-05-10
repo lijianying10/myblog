@@ -1,0 +1,169 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Large Colored Title Article
+% LaTeX Template
+% Version 1.1 (25/11/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[DIV=calc, paper=a4, fontsize=11pt, twocolumn]{scrartcl}	 % A4 paper and 11pt font size
+
+\usepackage{attachfile}
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage[protrusion=true,expansion=true]{microtype} % Better typography
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage[svgnames]{xcolor} % Enabling colors by their 'svgnames'
+\usepackage[hang, small,labelfont=bf,up,textfont=it,up]{caption} % Custom captions under/above floats in tables or figures
+\usepackage{booktabs} % Horizontal rules in tables
+\usepackage{fix-cm}	 % Custom font sizes - used for the initial letter in the document
+
+\usepackage{sectsty} % Enables custom section titles
+\allsectionsfont{\usefont{OT1}{phv}{b}{n}} % Change the font of all section commands
+
+\usepackage{fancyhdr} % Needed to define custom headers/footers
+\pagestyle{fancy} % Enables the custom headers/footers
+\usepackage{lastpage} % Used to determine the number of pages in the document (for "Page X of Total")
+
+% Headers - all currently empty
+\lhead{}
+\chead{}
+\rhead{}
+
+% Footers
+\lfoot{}
+\cfoot{}
+\rfoot{\footnotesize Page \thepage\ of \pageref{LastPage}} % "Page 1 of 2"
+
+\renewcommand{\headrulewidth}{0.0pt} % No header rule
+\renewcommand{\footrulewidth}{0.4pt} % Thin footer rule
+
+\usepackage{lettrine} % Package to accentuate the first letter of the text
+\newcommand{\initial}[1]{ % Defines the command and style for the first letter
+\lettrine[lines=3,lhang=0.3,nindent=0em]{
+\color{DarkGoldenrod}
+{\textsf{#1}}}{}}
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\usepackage{titling} % Allows custom title configuration
+
+\newcommand{\HorRule}{\color{DarkGoldenrod} \rule{\linewidth}{1pt}} % Defines the gold horizontal rule around the title
+
+\pretitle{\vspace{-30pt} \begin{flushleft} \HorRule \fontsize{50}{50} \usefont{OT1}{phv}{b}{n} \color{DarkRed} \selectfont} % Horizontal rule before the title
+
+\title{Build a Fortran project through CMake} % Your article title
+
+\posttitle{\par\end{flushleft}\vskip 0.5em} % Whitespace under the title
+
+\preauthor{\begin{flushleft}\large \lineskip 0.5em \usefont{OT1}{phv}{b}{sl} \color{DarkRed}} % Author font configuration
+
+\author{J.Y.Li} % Your name
+
+\postauthor{\footnotesize \usefont{OT1}{phv}{m}{sl} \color{Black} % Configuration for the institution name
+Dalian Neusoft University of Information % Your institution
+
+\par\end{flushleft}\HorRule} % Horizontal rule after the title
+
+\date{} % Add a date here if you would like one to appear underneath the title block
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Print the title
+
+\thispagestyle{fancy} % Enabling the custom headers/footers for the first page 
+
+%----------------------------------------------------------------------------------------
+%	ABSTRACT
+%----------------------------------------------------------------------------------------
+
+% The first character should be within \initial{}
+\initial{I}\textbf{n recent days I made a hard work for a more flexible Fortran project build. Using this template you will made a possible build Fortran project in Linux environment and made a data analysis program at the same time. The project in this PDF file append. \attachfile{Cmake-Fortran.tar.gz} }
+
+%----------------------------------------------------------------------------------------
+%	ARTICLE CONTENTS
+%----------------------------------------------------------------------------------------
+
+\section*{Introduction}
+
+In recently work we have to compute many version Fortran program.
+These programs all developed in VS2010. 
+When transform source code to Linux server and compute target data.
+We got a trouble that analysis dependence of code and library is very hard.
+So we need make a lighter faster method to build the project.
+
+In last BLOG we have make a method use in C/C++. 
+Now we even choose this tool to build Fortran.
+To make an easily faster auto dependence invokes the compiler and also makes a huge data analysis tool at the same time.
+In this project we make a multiple target project (two executable and one library). 
+The module core is the target build by Fortran program.
+And the other executable is data analysis program. 
+The library writing for diagram output dependence on CERN ROOT.
+
+\section{How to use this template project}
+
+At very first you need get the apped of the template project.
+Then UNTAR the package.
+Then you get the template project.
+You may add you projecto files the the path \textbf{Cmake-Fortran/src/core}
+And then you need to change the \textbf{CMakeLists.txt} file in compare to the core directory.
+Then I will try to describe the CMakeLists.txt change step by step
+\begin{itemize}
+\item Set the project name in \textbf{project(your project name)}
+\item Set compiler you need compiler the program. MPIIFORT is default. \\
+	\textbf{set (CMAKE\_Fortran\_COMPILER mpiifort)}
+\item Optimaze the compiler parameter in syntax\\
+	for release \\
+	\textbf{set (CMAKE\_Fortran\_FLAGS\_RELEASE "-O3")}\\
+	for debug \\
+	\textbf{set (CMAKE\_Fortran\_FLAGS\_DEBUG   "-O0 -g")}
+\item Adject the include directory.  in syntax \\
+	\textbf{include\_directories( }\\
+	We need have a graphics library in depandence by default.\\
+	Special explain in this syntax. you need add the floader line by line.
+	Don't forget there are even have a ")" at the tail of this syntax.
+\item Add source code file in syntax \\
+	\textbf{set (src }\\
+	The format is the same as add include foader.\\
+	At the capital of the file name you need add a string before it.
+	\textbf{ \$\{CMAKE\_SOURCE\_DIR\}/core/ }
+\end{itemize}
+
+That is mainly you need to de change the CMakeLists.txt.
+
+\section{How to use data analysis module}
+
+In this section you need have many C/C++ develop experience.
+And the you can use CERN ROOT freely.
+This module have a good feature that you can analysis huge count of data.
+In foader MakePlot have only one file.
+Edit this file read data file and get the data array send it to library event.
+Edit a ROOT script and change it to the CERN module by CINT.
+
+\section{build project and import the project to project}
+
+In floader script have a build script.
+Run it and you will configure the project and compile the project. 
+And then open floader \textbf{build\\bin}then you will see a file name MTF4.exe
+that is you main target of you fortran project.
+open your eclipse(you need install CDT) click file $\rightarrow$ import $\rightarrow$ choose General/Existing projects into weorkspace
+ $\rightarrow$select root directory(\textbf{the path is you project built directory})  $\rightarrow$ finish
+then you will see a new project in you eclipse \textbf{project explorer}
+
+\end{document}
